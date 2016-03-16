@@ -2,7 +2,7 @@ FROM iron/java:1.8
 
 MAINTAINER Daniel Zohar <daniel@memrise.com>
 
-ENV SNOWPLOW_SOURCE_ZIP snowplow_kinesis_r78_great_hornbill_rc3.zip
+ENV SNOWPLOW_SOURCE_ZIP snowplow_kinesis_r78_great_hornbill.zip
 
 WORKDIR /snowplow_jars/
 RUN mkdir -p /etc/snowplow/ && \

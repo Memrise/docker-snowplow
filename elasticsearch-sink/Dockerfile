@@ -1,4 +1,4 @@
-FROM memrise/snowplow:r78_rc3
+FROM memrise/snowplow:r78
 
 MAINTAINER Daniel Zohar <daniel@memrise.com>
 
