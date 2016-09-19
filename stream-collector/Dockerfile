@@ -1,8 +1,12 @@
-FROM memrise/snowplow:r78
+FROM iron/java:1.8
 
 MAINTAINER Daniel Zohar <daniel@memrise.com>
 
-RUN mv snowplow-stream-collector-0.6.0 /opt/snowplow/snowplow-stream-collector.jar
+RUN mkdir -p /etc/snowplow/ && \
+    mkdir -p /opt/snowplow/
+
+ENV SNOWPLOW_JAR snowplow_stream_collector_0.7.0.zip
+RUN wget http://dl.bintray.com/snowplow/snowplow-generic/${SNOWPLOW_SOURCE_ZIP} -O /opt/snowplow/snowplow-stream-collector.jar
 
 WORKDIR /opt/snowplow/
 RUN rm -rf /snowplow_jars/
