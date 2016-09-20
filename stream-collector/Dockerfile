@@ -5,11 +5,14 @@ MAINTAINER Daniel Zohar <daniel@memrise.com>
 RUN mkdir -p /etc/snowplow/ && \
     mkdir -p /opt/snowplow/
 
-ENV SNOWPLOW_JAR snowplow_stream_collector_0.7.0.zip
-RUN wget http://dl.bintray.com/snowplow/snowplow-generic/${SNOWPLOW_SOURCE_ZIP} -O /opt/snowplow/snowplow-stream-collector.jar
+ENV SNOWPLOW_ZIP snowplow_stream_collector_0.7.0.zip
+ENV SNOWPLOW_JAR snowplow-stream-collector-0.7.0
 
 WORKDIR /opt/snowplow/
-RUN rm -rf /snowplow_jars/
+RUN wget http://dl.bintray.com/snowplow/snowplow-generic/${SNOWPLOW_ZIP} && \
+    unzip ${SNOWPLOW_ZIP} && \
+    rm ${SNOWPLOW_ZIP} && \
+    mv ${SNOWPLOW_JAR} snowplow-stream-collector.jar
 
 COPY config/collector.conf /etc/snowplow/collector.conf
 

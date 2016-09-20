@@ -5,10 +5,13 @@ MAINTAINER Daniel Zohar <daniel@memrise.com>
 RUN mkdir -p /etc/snowplow/ && \
     mkdir -p /opt/snowplow/
 
-ENV SNOWPLOW_JAR snowplow_elasticsearch_sink_0.7.0.zip
-RUN wget http://dl.bintray.com/snowplow/snowplow-generic/${SNOWPLOW_SOURCE_ZIP} -O /opt/snowplow/snowplow-elasticsearch-sink.jar
+ENV SNOWPLOW_ZIP snowplow_kinesis_elasticsearch_sink_0.8.0_rc1_2x.zip
+ENV SNOWPLOW_JAR snowplow-elasticsearch-sink-0.8.0-rc1-2x
 
 WORKDIR /opt/snowplow/
-RUN rm -rf /snowplow_jars/
+RUN wget http://dl.bintray.com/snowplow/snowplow-generic/${SNOWPLOW_ZIP} && \
+    unzip ${SNOWPLOW_ZIP} && \
+    rm ${SNOWPLOW_ZIP} && \
+    mv ${SNOWPLOW_JAR} snowplow-elasticsearch-sink.jar
 
 ENTRYPOINT ["/usr/bin/java", "-jar", "snowplow-elasticsearch-sink.jar", "--config", "/etc/snowplow/elasticsearch-sink.conf"]
